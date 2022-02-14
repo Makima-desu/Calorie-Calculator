@@ -103,7 +103,7 @@ def calorieCalc():
 def main():
     # calorieCalc()
     # food = parseFoodcsv()
-    # eatenFood(food) 
+    eatenFood(food) 
     writeToFile()
 
 if __name__ == "__main__":
