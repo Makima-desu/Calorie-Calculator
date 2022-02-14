@@ -1,0 +1,115 @@
+from ast import Pass
+import os 
+import csv
+from datetime import *
+
+
+
+#Returns the date of today
+def getDate():
+    month = date.today().strftime("%B")
+    day = date.today().strftime("%d")
+    year = date.today().strftime("%Y")
+    date_string = f"{month} {day} {year}:"
+    return date_string
+
+
+
+#Parse thorugh the csv to allow us to check for ingredients
+def parseFoodcsv():
+    
+    print("Parsing food CSV...")
+
+    with open('Foods.csv', mode='r') as data:
+        reader = csv.reader(data)
+
+        return { rows[0]: rows[1] for rows in reader }
+
+#Input the ingrdient names in a list 
+def getFoodEaten():
+    foods_eaten = []
+
+    food = ""
+
+    while True:
+        food = input("Food eaten (q to finish): ")
+
+        if food == 'q':
+            break
+        
+        foods_eaten.append(food)
+
+    return foods_eaten
+
+#A function to take user input for calculating calories
+def eatenFood(food):
+    total_calories = 0
+
+    food_list = getFoodEaten() 
+
+    for food_name, calories in food.items():
+        if food_name in food_list:
+            total_calories += int(calories)
+
+    return total_calories
+
+def writeToFile():
+    with open("C:/Users/Arthur/Desktop/Calorie.txt", "w") as path:
+        path.write(getDate())
+        path.close()
+    # Write other input
+
+# Uses a formula to calculate the calories you need daily to maintain weight
+def calorieCalc(): 
+    weight, height, age = input("Input your weight, height and age. It is a metric system.\n> ").split()
+    male_calories = 10 * float(weight) + 6.25 * float(height) - 5 * float(age) + 5
+    female_calories = 10 * float(weight) + 6.25 *float(height) - 5 * float(age) - 161
+    choose = input("Male or Female?\n> ")
+    exercise = input("Choose exercise level\n> ")
+    
+    cal_per_day = 'Calories to maintain weight'
+
+    
+
+  
+
+    if choose == 'M' and exercise == 'Sedentary':
+        print(male_calories * 1.20, cal_per_day)
+    elif choose == 'M' and exercise == 'Light':
+        print(male_calories * 1.37, cal_per_day)
+    elif choose == 'M' and exercise == 'Moderate':
+        print(male_calories * 1.46, cal_per_day)
+    elif exercise == "Active" and choose == 'M':
+        print("{:.2f}".format(round(male_calories * 1.55, 2)))
+    elif choose == 'M' and exercise == 'Very Active':
+        print(male_calories * 1.72, cal_per_day)
+    elif choose == 'M' and exercise == 'Extra Active':
+        print(male_calories * 1.90, cal_per_day)
+    elif choose == 'F' and exercise == 'Sedentary':
+        print(female_calories * 1.20, cal_per_day)
+    elif choose == 'F' and exercise == 'Light':
+        print(female_calories * 1.37, cal_per_day)
+    elif choose == 'F' and exercise == 'Moderate':
+        print(female_calories * 1.46, cal_per_day)
+    elif exercise == "Active" and choose == 'F':
+        print("{:.2f}".format(round(female_calories * 1.46, 2)))
+    elif choose == 'F' and exercise == 'Very Active':
+        print(female_calories * 1.72, cal_per_day)
+    elif choose == 'F' and exercise == 'Extra Active':
+        print(female_calories * 1.90, cal_per_day)
+
+
+#Main function which activates the program by calling other functions
+def main():
+    # calorieCalc()
+    # food = parseFoodcsv()
+    # eatenFood(food) 
+    writeToFile()
+
+if __name__ == "__main__":
+    main() 
+    
+# its just format options in print, just google "pythjon print formatting  youll undertand ok bye" 
+
+
+
