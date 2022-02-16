@@ -1,4 +1,9 @@
 # Calorie-Calculator
-Tracks and calculates how many calories you need daily
+* Tracks calories in a txt document
+* Calculates your daily need of calories
+* Has a small table of foods stored in a csv. It will be expandede sometime
 
-Not yet fully developed. Please don't use it yet
+Basically finished. Only needs a few more changes
+
+
+# Huge Thanks to Sam :)
