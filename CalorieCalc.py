@@ -2,12 +2,10 @@ import getpass
 import csv
 from datetime import *
 
-# To-Do
-# If potato is entered twice it needs to count up the sum
-
 
 #Returns the date of today
 def getDate():
+
     month = date.today().strftime("%B")
     day = date.today().strftime("%d")
     year = date.today().strftime("%Y")
@@ -16,16 +14,24 @@ def getDate():
 
 #Parse thorugh the csv to allow us to check for ingredients
 def parseFoodcsv():
-    
-    print("Parsing food CSV...")
 
+    print("Choose names from the following list:")
+
+    #This opens the file specifically to parse only the names of the foods for you to choose from
+    with open('Foods.csv', mode='r') as foods:
+        file = csv.reader(foods)
+        for read in file:
+            print(read[0])
+      
     with open('Foods.csv', mode='r') as data:
         reader = csv.reader(data)
 
         return { rows[0]: rows[1] for rows in reader }
 
+    
 #Input the ingredient names in a list 
 def getFoodEaten():
+
     foods_eaten = []
 
     food = ""
@@ -42,6 +48,7 @@ def getFoodEaten():
     
 #A function to take user input for calculating calories
 def eatenFood(food):
+
     total_calories = 0
 
     food_list = getFoodEaten() 
@@ -54,6 +61,7 @@ def eatenFood(food):
 
 # Outputs into a file named Calorie.txt
 def writeToFile(date, calorie_form, food_eaten):
+
     user_name = getpass.getuser()
     with open("C:/Users/" + user_name + "/Desktop/Calorie Tracker.txt", "a") as file:
         text_list = []
@@ -70,6 +78,7 @@ def writeToFile(date, calorie_form, food_eaten):
     
 # Uses a formula to calculate the calories you need daily to maintain weight
 def calorieFormula(gender, exercise, male_calories, female_calories): 
+
     cal_per_day = 'Calories to maintain weight'
 
     if gender== 'M' and exercise == 'Sedentary':
@@ -99,6 +108,7 @@ def calorieFormula(gender, exercise, male_calories, female_calories):
 
 #Main function which activates the program by calling other functions
 def main():
+
     exercises = ['Sedentary', 'Light', 'Moderate', 'Active', 'Extra Active']
     
     print('Example: 63 174 17. Weight, Height, Age')
