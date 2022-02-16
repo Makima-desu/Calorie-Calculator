@@ -49,7 +49,7 @@ def eatenFood(food):
 
 # Outputs into a file named Calorie.txt
 def writeToFile(date, calorie_form, food_eaten):
-    with open("C:/Users/Arthur/Desktop/Calorie.txt", "a") as file:
+    with open("C:/Users/" + user_name + "/Desktop/Calorie Tracker.txt", "a") as file:
         text_list = []
 
         text_list.append( (date, calorie_form, food_eaten) )
