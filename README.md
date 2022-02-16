@@ -6,4 +6,4 @@
 Basically finished. Only needs a few more changes
 
 
-# Huge Thanks to Sam :)
+# Huge Thanks to Sam :) (Helped a ton!)
