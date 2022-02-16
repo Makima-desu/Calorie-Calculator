@@ -4,9 +4,6 @@ from datetime import *
 
 # To-Do
 # If potato is entered twice it needs to count up the sum
-# Display Exercise levels to input
-# Give an example of how to input metrics
-# Remind that everything should start with a Capital letter
 
 
 #Returns the date of today
@@ -103,10 +100,14 @@ def calorieFormula(gender, exercise, male_calories, female_calories):
 #Main function which activates the program by calling other functions
 def main():
     exercises = ['Sedentary', 'Light', 'Moderate', 'Active', 'Extra Active']
+    
+    print('Example: 63 174 17. Weight, Height, Age')
     weight, height, age = input("Input your weight, height and age. It is a metric system.\n> ").split()
+
     male_calories = 10 * float(weight) + 6.25 * float(height) - 5 * float(age) + 5
     female_calories = 10 * float(weight) + 6.25 *float(height) - 5 * float(age) - 161
 
+    print('Please remember to start everything with a Capital Letter')
     gender = input('Gender\n> ')
     print('Exercises:')
     for exercise in exercises:
