@@ -108,11 +108,11 @@ def main():
     female_calories = 10 * float(weight) + 6.25 *float(height) - 5 * float(age) - 161
 
     print('Please remember to start everything with a Capital Letter')
-    gender = input('Gender\n> ')
-    print('Exercises:')
+    gender = input('Gender M for Male / F for Female\n> ')
+    print('Choose your exercise level:')
     for exercise in exercises:
         print(exercise)
-    exercise = input('Exercise level\n> ')
+    exercise = input('> ')
 
     date = getDate()
     calorie_form = calorieFormula(gender, exercise, male_calories, female_calories)
