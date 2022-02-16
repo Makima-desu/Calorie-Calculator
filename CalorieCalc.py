@@ -2,6 +2,7 @@ import getpass
 import csv
 from datetime import *
 
+
 #Returns the date of today
 def getDate():
 
@@ -26,7 +27,8 @@ def parseFoodcsv():
         reader = csv.reader(data)
 
         return { rows[0]: rows[1] for rows in reader }
-   
+
+    
 #Input the ingredient names in a list 
 def getFoodEaten():
 
@@ -72,6 +74,7 @@ def writeToFile(date, calorie_form, food_eaten):
             file.write(line)
             file.write('\n')
             file.close()
+
     
 # Uses a formula to calculate the calories you need daily to maintain weight
 def calorieFormula(gender, exercise, male_calories, female_calories): 
@@ -106,7 +109,7 @@ def calorieFormula(gender, exercise, male_calories, female_calories):
 #Main function which activates the program by calling other functions
 def main():
 
-    exercises = ['Sedentary', 'Light', 'Moderate', 'Active', 'Extra Active']
+    exercises = ['Sedentary: Little or no exercise', 'Light: Exercise 1-3 times/week', 'Moderate: Exercise 4-5 times/week', 'Active: Daily exercise or intense exercise 3-4 times/week', 'Very Active: Intense exercise 6-7 times/week', 'Extra Active: Very intense exercise daily, or physical job' ]
     
     print('Example: 63 174 17. Weight, Height, Age')
     weight, height, age = input("Input your weight, height and age. It is a metric system.\n> ").split()
