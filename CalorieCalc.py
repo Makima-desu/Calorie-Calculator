@@ -49,6 +49,7 @@ def eatenFood(food):
 
 # Outputs into a file named Calorie.txt
 def writeToFile(date, calorie_form, food_eaten):
+    user_name = getpass.getuser()
     with open("C:/Users/" + user_name + "/Desktop/Calorie Tracker.txt", "a") as file:
         text_list = []
 
