@@ -26,7 +26,9 @@ def parseFoodcsv():
     with open('Foods.csv', mode='r') as data:
         reader = csv.reader(data)
 
-        return { rows[0]: rows[1] for rows in reader }
+        row = { rows[0].lower(): rows[1].lower() for rows in reader }
+
+        return row
 
     
 #Input the ingredient names in a list 
@@ -38,24 +40,24 @@ def getFoodEaten():
 
     while True:
         food = input("Food eaten (q to finish): ")
-
         if food == 'q':
             break
-        
+        food.lower()
         foods_eaten.append(food)
 
     return foods_eaten
     
 #A function to take user input for calculating calories
-def eatenFood(food):
+def eatenFood(foodDict):
 
     total_calories = 0
+    food_list = getFoodEaten()
 
-    food_list = getFoodEaten() 
-
-    for food_name, calories in food.items():
-        if food_name in food_list:
-            total_calories += int(calories)
+    for food_name in food_list:
+        if food_name in foodDict.keys():
+            print('Found {}'.format(food_name))
+            
+            total_calories += int(foodDict[food_name])
 
     return str(total_calories) + ' ' + 'Calories eaten'
 
@@ -81,29 +83,29 @@ def calorieFormula(gender, exercise, male_calories, female_calories):
 
     cal_per_day = 'Calories to maintain weight'
 
-    if gender== 'M' and exercise == 'Sedentary':
+    if gender == 'M' and exercise == 'sedentary':
         return str(male_calories * 1.20) + ' ' + cal_per_day
-    elif gender== 'M' and exercise == 'Light':
+    elif gender == 'M' and exercise == 'light':
         return str(male_calories * 1.37) + ' ' + cal_per_day
-    elif gender== 'M' and exercise == 'Moderate':
+    elif gender == 'M' and exercise == 'moderate':
         return str(male_calories * 1.46) + ' ' + cal_per_day
-    elif exercise == "Active" and gender== 'M':
+    elif exercise == "active" and gender== 'M':
         return "{:.2f}".format(round(male_calories * 1.55, 2)) + ' ' + cal_per_day
-    elif gender== 'M' and exercise == 'Very Active':
+    elif gender == 'M' and exercise == 'very active':
         return str(male_calories * 1.72) + ' ' + cal_per_day
-    elif gender== 'M' and exercise == 'Extra Active':
+    elif gender == 'M' and exercise == 'extra active':
         return str(male_calories * 1.90) + ' ' + cal_per_day
-    elif gender== 'F' and exercise == 'Sedentary':
+    elif gender == 'F' and exercise == 'sedentary':
         return str(female_calories * 1.20) + ' ' + cal_per_day
-    elif gender== 'F' and exercise == 'Light':
+    elif gender == 'F' and exercise == 'light':
         return str(female_calories * 1.37) + ' ' + cal_per_day
-    elif gender== 'F' and exercise == 'Moderate':
+    elif gender == 'F' and exercise == 'moderate':
         return str(female_calories * 1.46) + ' ' + cal_per_day
-    elif exercise == "Active" and gender== 'F':
+    elif exercise == "active" and gender== 'F':
         return "{:.2f}".format(round(female_calories * 1.46, 2)) + ' ' + cal_per_day
-    elif gender== 'F' and exercise == 'Very Active':
+    elif gender == 'F' and exercise == 'very active':
         return str(female_calories * 1.72) + ' ' + cal_per_day
-    elif gender== 'F' and exercise == 'Extra Active':
+    elif gender == 'F' and exercise == 'extra active':
         return str(female_calories * 1.90) + ' ' + cal_per_day
 
 #Main function which activates the program by calling other functions
@@ -117,18 +119,18 @@ def main():
     male_calories = 10 * float(weight) + 6.25 * float(height) - 5 * float(age) + 5
     female_calories = 10 * float(weight) + 6.25 *float(height) - 5 * float(age) - 161
 
-    print('Please remember to start everything with a Capital Letter')
-    gender = input('Gender M for Male / F for Female\n> ')
-    print('Choose your exercise level:')
+    gender = input('Gender: M for Male / F for Female\n> ').upper()
+    
     for exercise in exercises:
         print(exercise)
-    exercise = input('> ')
+    print('Choose your exercise level from the list above:')   
+    exercise = input('> ').lower()
     print('---------------------------------------')
 
     date = getDate()
     calorie_form = calorieFormula(gender, exercise, male_calories, female_calories)
-    food = parseFoodcsv()
-    food_eaten = eatenFood(food) 
+    foodDict = parseFoodcsv()
+    food_eaten = eatenFood(foodDict) 
     writeToFile(date, calorie_form, food_eaten)
 
 if __name__ == "__main__":
