@@ -136,7 +136,7 @@ def main():
 
     date = getDate()
     calorie_form = calorieFormula(gender, exercise, male_calories, female_calories)
-    foodDict = foodTablecsv
+    foodDict = foodTablecsv()
     food_eaten = eatenFood(foodDict) 
     writeToFile(date, calorie_form, food_eaten)
 
