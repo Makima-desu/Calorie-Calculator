@@ -39,10 +39,10 @@ def getFoodEaten():
     food = ""
 
     while True:
-        food = input("Food eaten (q to finish): ")
+        food = input("Food eaten (q to finish): ").lower()
         if food == 'q':
             break
-        food.lower()
+        
         foods_eaten.append(food)
 
     return foods_eaten
