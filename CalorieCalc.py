@@ -3,7 +3,7 @@ import csv
 from datetime import *
 
 
-#Returns the date of today
+#Returns the date of today so that it can be referenced later when output into the file
 def getDate():
 
     month = date.today().strftime("%B")
@@ -12,8 +12,8 @@ def getDate():
     date_string = f"{month} {day} {year}:"
     return date_string
 
-#Parse thorugh the csv to allow us to check for ingredients
-def parseFoodcsv():
+#A function to parse through food table csv
+def foodTablecsv():
 
     #This opens the file specifically to parse only the names of the foods for you to choose from
     with open('Foods.csv', mode='r') as foods:
@@ -23,15 +23,15 @@ def parseFoodcsv():
 
     print("Choose names from the list above:")
       
+    #Opens the food table to access the names that we input. such as "potato"
     with open('Foods.csv', mode='r') as data:
         reader = csv.reader(data)
-
         row = { rows[0].lower(): rows[1].lower() for rows in reader }
 
         return row
 
     
-#Input the ingredient names in a list 
+#Function to get the user to input food names 
 def getFoodEaten():
 
     foods_eaten = []
@@ -47,7 +47,7 @@ def getFoodEaten():
 
     return foods_eaten
     
-#A function to take user input for calculating calories
+#Function that takes getFoodEaten() function and calculates the total sum of the ingredients found
 def eatenFood(foodDict):
 
     total_calories = 0
@@ -61,7 +61,10 @@ def eatenFood(foodDict):
 
     return str(total_calories) + ' ' + 'Calories eaten'
 
-# Outputs into a file named Calorie.txt
+# Outputs into a file named Calorie.txt. 
+# date, takes in the getDate() function and return the date of today.
+# calorie_form takes in the calorieFormula() function and outputs it into the file
+# food_eaten takes in eatenFood() function and outputs it into the file
 def writeToFile(date, calorie_form, food_eaten):
 
     user_name = getpass.getuser()
@@ -79,6 +82,10 @@ def writeToFile(date, calorie_form, food_eaten):
 
     
 # Uses a formula to calculate the calories you need daily to maintain weight
+# gender is used in the formula such as Female or Male
+# exercise is the level of exercise used in the formula
+# male calories is the specific formula used for males
+# female_calories is the specific formula used for females
 def calorieFormula(gender, exercise, male_calories, female_calories): 
 
     cal_per_day = 'Calories to maintain weight'
@@ -129,7 +136,7 @@ def main():
 
     date = getDate()
     calorie_form = calorieFormula(gender, exercise, male_calories, female_calories)
-    foodDict = parseFoodcsv()
+    foodDict = foodTablecsv
     food_eaten = eatenFood(foodDict) 
     writeToFile(date, calorie_form, food_eaten)
 
